@@ -1,4 +1,4 @@
-# Week 1 — deteção de tramas 802.11a
+# Week 1 - deteção de tramas 802.11a
 
 O objetivo desta semana é perceber os parâmetros do sinal OFDM e a primeira etapa do recetor do artigo de Bloessl et al.: detetar o início de uma trama pela repetição da sequência de treino curta. O sinal de entrada é complexo, com componentes I e Q. A deteção estudada aqui não descodifica, por si só, o conteúdo da trama.
 
