@@ -21,3 +21,8 @@ python experiments/compare_windows.py recordings/Sample1_20MHz_Channel36.bin
 ```
 
 O script gera `experiments/compare_windows.png` e apresenta os valores medidos. A figura é um exemplo escolhido da gravação, não uma validação de todas as tramas.
+
+
+## Week 2 — Sync Short
+
+A montagem, os prints e os testes estão em [WEEK2.md](WEEK2.md).

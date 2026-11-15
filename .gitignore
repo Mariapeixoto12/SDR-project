@@ -1,0 +1,3 @@
+recordings/*.bin
+week2_sync_short.py
+__pycache__/
