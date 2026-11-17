@@ -1,4 +1,4 @@
-# Week 1 — deteção de tramas
+# Week 1 - deteção de tramas
 
 O ficheiro `week1_frame_detection.grc` lê amostras de uma gravação em banda base e calcula uma correlação normalizada com atraso de 16 amostras. A investigação, a descrição do cálculo e os resultados estão em [WEEK1.md](WEEK1.md).
 
