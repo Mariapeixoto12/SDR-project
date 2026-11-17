@@ -1,4 +1,4 @@
-# Week 2 — deteção com o Sync Short
+# Week 2 - deteção com o Sync Short
 
 ## Montagem
 
