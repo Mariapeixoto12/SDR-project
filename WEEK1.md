@@ -28,7 +28,7 @@ O preâmbulo 802.11a inclui dois campos de treino, distintos do campo SIGNAL que
 
 As durações assumem 20 MS/s. Os dois campos de treino ocupam 16 µs; incluindo o SIGNAL, os campos iniciais ocupam 20 µs.
 
-## Visão geral do recetor e tags — secção 2.1
+## Visão geral do recetor e tags - secção 2.1
 
 A Figura 1 do artigo divide o recetor numa parte de deteção da trama e noutra de processamento e descodificação. Após detetar a sequência curta, as etapas seguintes fazem sincronização, correção de desvios, transformação FFT e descodificação.
 
