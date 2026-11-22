@@ -7,7 +7,7 @@ Nesta semana, estudámos a secção 2.3 do artigo *An IEEE 802.11a/g/p OFDM Rece
 
 Partimos do circuito desenvolvido na Week 2 e acrescentámos o bloco **WiFi Sync Long**, um atraso de 320 amostras e um segundo **Tag Debug**, para observar a informação de sincronização produzida pelos dois blocos. Acrescentámos ainda um **File Sink** para guardar os sinais de saída e comparar diferentes valores de atraso.
 
-![Circuito da Week 3](image.png)
+![Circuito da Week 3](week3_diagrama.png)
 
 ## Frequency Offset Correction
 
