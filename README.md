@@ -26,3 +26,14 @@ O script gera `experiments/compare_windows.png` e apresenta os valores medidos. 
 ## Week 2 - Sync Short
 
 A montagem, os prints e os testes estão em [WEEK2.md](WEEK2.md).
+
+
+
+
+## Week 3 - Frequency Offset Correction
+
+Nesta semana, acrescentámos o bloco **WiFi Sync Long** ao circuito desenvolvido na Week 2, com o objetivo de estudar a correção do desvio residual de frequência e o papel da entrada atrasada na sincronização.
+
+Analisámos o funcionamento do bloco e realizámos experiências com diferentes valores de **Sync Length** e **Delay**, comparando as etiquetas de sincronização e as amostras de saída.
+
+O circuito está disponível em [week3_sync_long.grc](week3_sync_long.grc) e a explicação do algoritmo, os testes e os resultados encontram-se em [WEEK3.md](WEEK3.md).
