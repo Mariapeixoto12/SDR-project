@@ -4,7 +4,9 @@ Partimos do circuito da Week 2 e acrescentámos o **WiFi Sync Long**, um **Delay
 
 O objetivo desta semana foi estudar a correção do desvio de frequência (*Carrier Frequency Offset*, CFO) e perceber o funcionamento das duas entradas do Sync Long.
 
-![Circuito da Week 3](week3_diagrama.png)
+![Circuito da Week 3](../prints/week3/week3_diagrama.png)
+
+*Figura 1 — Circuito desenvolvido para a Week 3 no GNU Radio.*
 
 O circuito está disponível em [week3_sync_long.grc](week3_sync_long.grc).
 
@@ -34,7 +36,7 @@ Utilizámos a gravação `Sample1_20MHz_Channel36.bin`, com offset **1 247 600**
 
 Na configuração inicial, usámos **Sync Length = 320** e **Delay = 320**.
 
-![Autocorrelação normalizada - Week 3](../prints/week3/correlacao_week3.png)
+![Autocorrelação normalizada - Week 3](../prints/week3/week3.png)
 
 *Figura 2 — Autocorrelação normalizada durante a execução da Week 3.*
 
@@ -48,10 +50,6 @@ Após a execução, obtivemos as seguintes tags:
 | WiFi Sync Long | 0.00268413 |
 
 Os dois blocos produziram uma tag `wifi_start`, com valores associados à estimativa do desvio de frequência. No entanto, a presença destas tags não garante, por si só, que o sinal esteja corretamente alinhado.
-
-
-
-
 
 ### Alteração do Delay e do Sync Length
 
@@ -85,8 +83,6 @@ As partes mais importantes para esta semana foram:
 4. **Correção do sinal:** no estado `COPY`, o bloco aplica uma rotação de fase às amostras da entrada atrasada.
 
 A consulta deste código ajudou-nos a perceber porque é que o Sync Long utiliza a sequência longa e qual a função do Delay no processamento.
-
-
 
 O ficheiro [week3_sync_long.py](week3_sync_long.py) contém o Python gerado pelo GNU Radio para o circuito.
 
