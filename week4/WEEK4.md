@@ -6,7 +6,7 @@ A Figura 1 apresenta apenas a parte do circuito trabalhada nesta semana, incluin
 
 ![Blocos acrescentados na Week 4](../prints/week4/week4_new_part.png)
 
-*Figura 1 — Parte do circuito desenvolvida na Week 4.*
+*Figura 1 - Parte do circuito desenvolvida na Week 4.*
 
 O circuito completo está disponível em [WEEK4.grc](WEEK4.grc) e o Python gerado pelo GNU Radio em [WEEK4.py](WEEK4.py).
 
@@ -16,9 +16,36 @@ Nesta semana, estudámos o alinhamento dos símbolos OFDM, descrito na secção 
 
 O **WiFi Sync Long** utiliza *matched filtering* para localizar a sequência de treino longa (L-LTF), comparando o sinal recebido com uma sequência conhecida. Como a L-LTF contém duas repetições de 64 amostras, o bloco procura picos de correlação separados por essa distância.
 
-Cada símbolo OFDM de dados contém **80 amostras**: 16 de prefixo cíclico e 64 úteis. Após localizar o início dos símbolos, o Sync Long descarta o prefixo cíclico, mantendo as amostras necessárias para a FFT.
+Ao contrário da deteção inicial, onde o Sync Short utiliza autocorrelação para encontrar uma região repetitiva do sinal, nesta etapa precisamos de determinar com maior precisão a posição dos símbolos. O *matched filtering* permite obter picos de correlação mais definidos, mas exige o processamento de uma sequência conhecida. Por isso, é utilizado nesta fase de sincronização, depois de já ter sido detetado um possível início de trama.
 
-O **Stream to Vector** agrupa estas amostras em vetores de 64. A FFT transforma cada vetor para o domínio da frequência, permitindo obter os valores complexos das subportadoras OFDM.
+No artigo, a equação (6) descreve a correlação entre as amostras recebidas e a sequência longa conhecida:
+
+$$
+N_{\mathcal{P}} =
+\underset{n\in\{0,\ldots,N_{\mathrm{preamble}}\}}{\operatorname{arg\,max}_3}
+\left|
+\sum_{k=0}^{63}
+s[n+k]\overline{LT[k]}
+\right|
+$$
+
+Nesta expressão, $s[n+k]$ representa o sinal recebido e $LT[k]$ a sequência de treino conhecida, com 64 amostras. A operação calcula a correlação para diferentes posições do sinal e seleciona os índices dos três maiores picos.
+
+A partir destes picos, o artigo determina o início do símbolo seguinte através da equação (7):
+
+$$
+n_{\mathcal{P}}=\max(N_{\mathcal{P}})+64
+$$
+
+Acrescentamos **64 amostras** porque o último pico relevante de correlação ocorre 64 amostras antes do final da sequência de treino longa. Assim, conseguimos localizar o início do símbolo seguinte.
+
+Cada símbolo OFDM de dados contém **80 amostras**: 16 de prefixo cíclico e 64 úteis. O prefixo cíclico corresponde a uma cópia das últimas 16 amostras úteis, colocada no início do símbolo.
+
+Depois de determinar o alinhamento, o Sync Long descarta o prefixo cíclico dos símbolos seguintes à L-LTF, mantendo apenas as 64 amostras úteis.
+
+O **Stream to Vector** agrupa estas amostras em vetores de 64 elementos. Isto é necessário porque o Sync Long produz um fluxo contínuo de amostras, enquanto a FFT precisa de receber um vetor completo para processar cada símbolo.
+
+A FFT transforma cada vetor do domínio do tempo para o domínio da frequência, permitindo obter os valores complexos das subportadoras OFDM.
 
 Para visualizar os resultados, utilizámos um **Complex to Mag** e um **QT GUI Vector Sink**, ambos configurados para trabalhar com vetores de 64 elementos.
 
@@ -54,9 +81,13 @@ Consultámos o ficheiro [`sync_long.cc`](https://github.com/bastibl/gr-ieee802-1
 
 As partes mais relevantes para esta semana foram:
 
-1. **Matched filtering:** o bloco utiliza a sequência longa conhecida para calcular a correlação com o sinal recebido.
-2. **Alinhamento:** a função `search_frame_start()` procura dois picos separados por aproximadamente 64 amostras, permitindo localizar a L-LTF.
-3. **Remoção do prefixo cíclico:** no estado `COPY`, o bloco mantém as primeiras 128 amostras úteis da L-LTF e, nos símbolos seguintes, descarta as primeiras 16 amostras de cada grupo de 80.
+1. **Matched filtering:** a instrução `d_fir.filterN()` calcula a correlação entre o sinal recebido e a sequência longa conhecida, implementando a operação apresentada na equação (6).
+
+2. **Alinhamento:** a função `search_frame_start()` ordena os valores de correlação e procura dois picos separados por 64 amostras. O código também admite diferenças de 63 ou 65 amostras. A posição dos picos permite determinar o início da sequência longa.
+
+3. **Remoção do prefixo cíclico:** no estado `COPY`, o bloco mantém as primeiras 128 amostras úteis da L-LTF. Nos símbolos seguintes, descarta as primeiras 16 amostras de cada grupo de 80, encaminhando apenas as 64 úteis.
+
+A implementação atual não utiliza literalmente a expressão `max(N_P) + 64` da equação (7), mas segue o mesmo princípio de localizar a sequência longa a partir dos picos de correlação e utilizar essa posição para alinhar as amostras.
 
 No Python gerado pelo GNU Radio, confirmámos também a ligação:
 
