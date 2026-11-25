@@ -76,13 +76,7 @@ As partes mais importantes para esta semana foram:
 
 A consulta deste código ajudou-nos a perceber porque é que o Sync Long utiliza a sequência longa e qual a função do Delay no processamento.
 
-## Repetir a experiência
 
-1. Abrir [week3_sync_long.grc](week3_sync_long.grc) no GNU Radio Companion.
-2. Selecionar a gravação `Sample1_20MHz_Channel36.bin`, com offset `1247600`, comprimento `1800` e Repeat `No`.
-3. Configurar Sync Length e Delay para `320`, executar e observar as tags.
-4. Alterar apenas o Delay para `160` e guardar a saída num ficheiro diferente.
-5. Repetir com Sync Length e Delay iguais a `160`.
 
 O ficheiro [week3_sync_long.py](week3_sync_long.py) contém o Python gerado pelo GNU Radio para o circuito.
 
