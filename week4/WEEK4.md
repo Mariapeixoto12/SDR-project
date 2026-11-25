@@ -20,14 +20,16 @@ Ao contrário da deteção inicial, onde o Sync Short utiliza autocorrelação p
 
 No artigo, a equação (6) descreve a correlação entre as amostras recebidas e a sequência longa conhecida:
 
+
 $$
 N_{\mathcal{P}} =
-\underset{n\in\{0,\ldots,N_{\mathrm{preamble}}\}}{\operatorname{arg\,max}_3}
+\underset{n \in \{0,\ldots,N_{\mathrm{preamble}}\}}{\mathrm{arg\,max}_3}
 \left|
 \sum_{k=0}^{63}
 s[n+k]\overline{LT[k]}
 \right|
 $$
+
 
 Nesta expressão, $s[n+k]$ representa o sinal recebido e $LT[k]$ a sequência de treino conhecida, com 64 amostras. A operação calcula a correlação para diferentes posições do sinal e seleciona os índices dos três maiores picos.
 
