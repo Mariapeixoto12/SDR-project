@@ -1,39 +1,49 @@
 # Week 1 - deteção de tramas
 
-O ficheiro `week1_frame_detection.grc` lê amostras de uma gravação em banda base e calcula uma correlação normalizada com atraso de 16 amostras. A investigação, a descrição do cálculo e os resultados estão em [WEEK1.md](WEEK1.md).
+O ficheiro [week1_frame_detection.grc](week1/week1_frame_detection.grc) lê amostras de uma gravação em banda base e calcula uma correlação normalizada com atraso de 16 amostras. A investigação, a descrição do cálculo e os resultados estão em [WEEK1.md](week1/WEEK1.md).
 
 ## Preparação
 
-1. Descompactar `Wifi_Project_Baseband_recordings.tar.gz` e colocar `Sample1_20MHz_Channel36.bin` dentro da pasta `recordings`, ao lado do ficheiro `.grc`. Neste computador a gravação já foi colocada nessa pasta.
-2. Abrir o `.grc` no GNU Radio Companion 3.10 e executar com F6. O File Source assume amostras complexas de 32 bits por componente I/Q. O nome do ficheiro indica 20 MHz; o formato é uma interpretação plausível, não acompanhada de metadados no arquivo.
-3. A gravação é grande (1,6 GB). Não é necessário carregá-la para o GitHub; cada utilizador deve obtê-la a partir da fonte da unidade curricular.
+1. Descompactar `Wifi_Project_Baseband_recordings.tar.gz` e guardar a gravação `Sample1_20MHz_Channel36.bin` no computador.
+2. Abrir o ficheiro `.grc` no GNU Radio Companion 3.10, verificar o caminho configurado no File Source e executar com F6. As amostras são interpretadas como valores complexos, com 32 bits para cada componente I/Q.
+3. A gravação é grande (aproximadamente 1,6 GB), pelo que não foi incluída no GitHub.
 
-O File Source está configurado para repetir o excerto usado na comparação: **Offset** `1247600` e **Length** `900`. Estes campos contam amostras complexas. A repetição liga artificialmente o fim do excerto ao início e pode gerar artefactos nessa junção. Para percorrer a gravação inteira, alterar ambos os campos para `0` e, se não se quiser repetir o ficheiro, colocar **Repeat** em `No`. A taxa física `samp_rate` é 20 MS/s para o eixo temporal; `playback_rate` limita a velocidade de leitura em ficheiro, sem mudar os intervalos representados no gráfico. O trigger do gráfico usa o limiar visual 0,7: não é uma implementação completa de deteção ou descodificação.
+O File Source está configurado para utilizar um excerto da gravação. A variável `samp_rate` corresponde à frequência de amostragem de 20 MS/s, enquanto `playback_rate` controla a velocidade de reprodução do ficheiro.
 
-Para experimentar outra janela, alterar a variável `nwin` e voltar a executar. Os dois filtros FIR usam decimação 1 e `nwin` coeficientes iguais a 1 para somar uma janela de amostras, como na Figura 1 do artigo. O sinal normalizado pode ultrapassar 1; ajustar os limites verticais do gráfico quando necessário. O Throttle limita a velocidade de leitura do ficheiro e a carga do computador.
+Para experimentar diferentes janelas de autocorrelação, podemos alterar a variável `nwin` e executar novamente o circuito.
 
 ## Reproduzir a comparação
 
-Com Python, NumPy e Matplotlib instalados, executar a partir desta pasta:
+Com Python, NumPy e Matplotlib instalados, executar a partir da pasta principal do repositório:
 
 ```text
 python experiments/compare_windows.py recordings/Sample1_20MHz_Channel36.bin
 ```
 
-O script gera `experiments/compare_windows.png` e apresenta os valores medidos. A figura é um exemplo escolhido da gravação, não uma validação de todas as tramas.
+Este comando pressupõe que a gravação foi colocada na pasta `recordings`, na raiz do projeto.
 
+O script gera o gráfico [compare_windows.png](experiments/compare_windows.png), permitindo comparar os resultados obtidos para diferentes valores de `NWin`.
 
 ## Week 2 - Sync Short
 
-A montagem, os prints e os testes estão em [WEEK2.md](WEEK2.md).
+Nesta semana, acrescentámos o bloco **WiFi Sync Short** para detetar possíveis inícios de trama a partir da autocorrelação calculada na Week 1.
 
+Testámos diferentes valores de **Threshold** e **Min Plateau**, observando as etiquetas `wifi_start` produzidas pelo bloco.
 
+O circuito está disponível em [week2_sync_short.grc](week2/week2_sync_short.grc).
 
+A montagem, os testes e os resultados encontram-se em [WEEK2.md](week2/WEEK2.md).
+
+As capturas de ecrã estão na pasta [prints/week2](prints/week2/).
 
 ## Week 3 - Frequency Offset Correction
 
-Nesta semana, acrescentámos o bloco **WiFi Sync Long** ao circuito desenvolvido na Week 2, com o objetivo de estudar a correção do desvio residual de frequência e o papel da entrada atrasada na sincronização.
+Nesta semana, acrescentámos o bloco **WiFi Sync Long** ao circuito da Week 2, para estudar a correção do desvio residual de frequência e o funcionamento da entrada atrasada.
 
-Analisámos o funcionamento do bloco e realizámos experiências com diferentes valores de **Sync Length** e **Delay**, comparando as etiquetas de sincronização e as amostras de saída.
+Realizámos experiências com diferentes valores de **Sync Length** e **Delay**, comparando as etiquetas de sincronização e as amostras de saída.
 
-O circuito está disponível em [week3_sync_long.grc](week3_sync_long.grc) e a explicação do algoritmo, os testes e os resultados encontram-se em [WEEK3.md](WEEK3.md).
+O circuito está disponível em [week3_sync_long.grc](week3/week3_sync_long.grc).
+
+A explicação, as experiências e os resultados encontram-se em [WEEK3.md](week3/WEEK3.md).
+
+As capturas de ecrã estão na pasta [prints/week3](prints/week3/).
