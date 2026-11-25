@@ -34,6 +34,12 @@ Utilizámos a gravação `Sample1_20MHz_Channel36.bin`, com offset **1 247 600**
 
 Na configuração inicial, usámos **Sync Length = 320** e **Delay = 320**.
 
+![Autocorrelação normalizada - Week 3](../prints/week3/correlacao_week3.png)
+
+*Figura 2 — Autocorrelação normalizada durante a execução da Week 3.*
+
+Observámos um patamar de correlação próximo de 1, entre aproximadamente 21 e 27 µs, compatível com a sequência curta (L-STF).
+
 Após a execução, obtivemos as seguintes tags:
 
 | Bloco | Valor de `wifi_start` |
@@ -41,7 +47,11 @@ Após a execução, obtivemos as seguintes tags:
 | WiFi Sync Short | 0.00201026 |
 | WiFi Sync Long | 0.00268413 |
 
-Os valores estão associados às estimativas do desvio de frequência, em radianos por amostra.
+Os dois blocos produziram uma tag `wifi_start`, com valores associados à estimativa do desvio de frequência. No entanto, a presença destas tags não garante, por si só, que o sinal esteja corretamente alinhado.
+
+
+
+
 
 ### Alteração do Delay e do Sync Length
 
