@@ -2,7 +2,7 @@
 
 Partimos do circuito da Week 3 e acrescentámos um **Stream to Vector**, uma **FFT de 64 pontos**, um **Complex to Mag** e um **QT GUI Vector Sink**. Ligámos também um **File Sink** à saída da FFT para guardar os resultados complexos.
 
-A Figura 1 apresenta apenas a parte do circuito trabalhada nesta semana, incluindo os novos blocos ligados à saída do WiFi Sync Long. O restante circuito manteve-se igual ao das semanas anteriores.
+A Figura 1 apresenta apenas a parte do circuito trabalhada nesta semana. O restante circuito manteve-se igual ao das semanas anteriores.
 
 ![Blocos acrescentados na Week 4](../prints/week4/week4_new_part.png)
 
