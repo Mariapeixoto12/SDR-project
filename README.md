@@ -52,4 +52,4 @@ As capturas de ecrã estão na pasta [prints/week3](prints/week3/).
 
 Comparámos a estimativa de fase do WiFi Frame Equalizer com 0° e +20° de rotação introduzida depois da FFT. A estimativa acompanhou a rotação e a constelação à saída ficou nas duas posições esperadas em BPSK.
 
-O [fluxograma](week5/WEEK5.grc), o [sinal de referência](week5/week5_referencia.bin) e os [resultados com instruções para repetir o ensaio](week5/RESULTADOS.md) estão na pasta `week5`.
+O [fluxograma](week5/WEEK5.grc), o [sinal de referência](week5/week5_referencia.bin) e os [resultados](week5/RESULTADOS.md) estão na pasta `week5`.
