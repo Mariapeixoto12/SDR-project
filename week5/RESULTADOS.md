@@ -41,8 +41,14 @@ Uma rotação de fase desloca os pontos da constelação, o que pode dificultar 
 
 No gráfico de entrada, o ponto à direita está perto de **(8,3; 3,0)**. A razão entre as componentes dá um ângulo de aproximadamente **20°** (`arctan(3,0 / 8,3)`), coerente com a rotação introduzida. As posições não utilizadas contribuem para o ponto na origem. No gráfico de saída, os pontos BPSK estão alinhados com o eixo real. Os gráficos têm escalas diferentes e mostram conjuntos de pontos diferentes, pelo que a comparação é visual.
 
-## Comparação adicional a realizar
+## Comparação das subportadoras de dados
 
-Para comparar ponto a ponto, falta escolher as mesmas 48 subportadoras de dados de um único símbolo nos dois lados do equalizador. A captura acima mostra todas as posições da FFT à entrada, incluindo os pilotos e as posições não utilizadas. A saída do bloco mostra o efeito conjunto da correção de fase e da equalização.
+Acrescentámos um **Skip Head** para saltar os dois símbolos de treino e o SIGNAL. Em seguida, um **Head** seleciona o primeiro símbolo de dados e o **OFDM Serializer** escolhe as suas 48 subportadoras de dados. O gráfico de entrada apresenta dois grupos inclinados e deixa de mostrar o ponto na origem.
+
+![Constelação das 48 subportadoras de dados à entrada do equalizador](../prints/week5/constelacao_48_entrada.png)
+
+*Captura do ensaio com as 48 subportadoras selecionadas à entrada. O gráfico de saída nesta captura ainda mostra um conjunto maior de pontos.*
+
+Depois acrescentámos um **Head** no ramo de saída para mostrar os primeiros 48 valores também à saída. Na execução verificada, os grupos de entrada continuaram inclinados e os de saída apareceram em aproximadamente −1 e +1 no eixo real. A saída do bloco mostra o efeito conjunto da correção de fase e da equalização; os gráficos usam escalas diferentes.
 
 Outro ensaio possível é introduzir −20°. Nesse caso, prevemos um `beta` próximo de −0.349 rad. Ainda não medimos este caso.
