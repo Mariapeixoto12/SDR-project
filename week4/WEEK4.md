@@ -97,13 +97,7 @@ No Python gerado pelo GNU Radio, confirmámos também a ligação:
 
 A saída da FFT está igualmente ligada ao Complex to Mag e ao QT GUI Vector Sink, permitindo observar as magnitudes das subportadoras.
 
-## Repetir a experiência
 
-1. Abrir [WEEK4.grc](WEEK4.grc) no GNU Radio Companion e verificar o caminho da gravação.
-2. Confirmar `Offset = 1247600`, `Length = 1800`, `Repeat = No`, `Sync Length = 320` e `Delay = 320`.
-3. Verificar que o Stream to Vector e a FFT estão configurados para 64 elementos, com a FFT no sentido direto e `Shift = Yes`.
-4. Executar o circuito e observar os gráficos.
-5. Confirmar a criação do ficheiro `week4_fft_output.bin` e verificar o seu tamanho.
 
 ## Utilização de IA
 
