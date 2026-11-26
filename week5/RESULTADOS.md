@@ -2,7 +2,7 @@
 
 ## Sinal de referência
 
-Na Week 5 queríamos verificar se o recetor consegue estimar uma rotação de fase conhecida. Na gravação usada nas semanas anteriores, os desvios introduzidos pela transmissão real eram desconhecidos. Por isso criámos um sinal em simulação que pudéssemos usar como referência.
+Na gravação real das semanas anteriores, o recetor podia estimar a fase usando os pilotos. Mas não tínhamos uma medição independente da rotação presente para confirmar o valor estimado. Escolhemos criar um sinal simulado como referência, sem o ruído do canal, e fizemos dois ensaios com o mesmo ficheiro. No segundo, acrescentámos +20° e comparámos a variação estimada pelo recetor com a rotação que introduzimos. Também seria possível acrescentar uma rotação conhecida à gravação real e comparar os valores de `beta`.
 
 Partimos do [exemplo `wifi_loopback.grc`](https://github.com/bastibl/gr-ieee802-11/blob/maint-3.10/examples/wifi_loopback.grc), que gera tramas Wi-Fi. Ligámos um **File Sink** do tipo **Complex** à saída do **Packet Pad2**, que acrescenta amostras a zero antes de cada trama. Ao executar o loopback, gravámos as amostras em [week5_referencia.bin](week5_referencia.bin) antes de passarem pelo **Channel Model**, que acrescenta ruído.
 
@@ -23,7 +23,7 @@ O recetor conhece os valores dos quatro pilotos. O equalizador compara os piloto
 | 0° | `3.32614e-08 rad` (praticamente 0°) |
 | +20° | `0.349066 rad` (aproximadamente +20°) |
 
-Em cada ensaio, as 24 etiquetas mostraram o mesmo valor. A diferença entre as duas medições correspondeu aos +20° introduzidos.
+Em cada execução apareceram 24 etiquetas com o mesmo valor. A estimativa passou de praticamente 0 para `0.349066 rad`: uma diferença de cerca de +20°, como esperávamos. As etiquetas correspondem às tramas processadas na mesma gravação, não a 24 ensaios independentes.
 
 ![Fast Multiply Const entre a FFT e o equalizador, com leitura do beta a +20°](../prints/week5/beta_20graus.png)
 
@@ -38,3 +38,9 @@ Uma rotação de fase desloca os pontos da constelação, o que pode dificultar 
 ![Constelação BPSK à saída do equalizador no ensaio a +20°](../prints/week5/constelacao_20graus.png)
 
 *Ensaio com +20° introduzidos.*
+
+## Comparação adicional a realizar
+
+Para visualizar o efeito no sinal, podemos observar as mesmas 48 subportadoras de dados do mesmo símbolo antes e depois do equalizador, mantendo a rotação de +20°. Esperamos vê-las rodadas à entrada e próximas das posições BPSK à saída. Esta comparação ainda não foi realizada. A saída do bloco inclui correção de fase e equalização, pelo que mostra o efeito conjunto das duas operações.
+
+Outro ensaio possível é introduzir −20°. Nesse caso, prevemos um `beta` próximo de −0.349 rad. Ainda não medimos este caso.
