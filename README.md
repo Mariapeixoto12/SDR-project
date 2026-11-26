@@ -47,3 +47,9 @@ O circuito está disponível em [week3_sync_long.grc](week3/week3_sync_long.grc)
 A explicação, as experiências e os resultados encontram-se em [WEEK3.md](week3/WEEK3.md).
 
 As capturas de ecrã estão na pasta [prints/week3](prints/week3/).
+
+## Week 5 - Correção de fase
+
+Comparámos a estimativa de fase do WiFi Frame Equalizer com 0° e +20° de rotação introduzida depois da FFT. A estimativa acompanhou a rotação e a constelação à saída ficou nas duas posições esperadas em BPSK.
+
+O [fluxograma](week5/WEEK5.grc), o [sinal de referência](week5/week5_referencia.bin) e os [resultados com instruções para repetir o ensaio](week5/RESULTADOS.md) estão na pasta `week5`.
