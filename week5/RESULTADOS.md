@@ -35,12 +35,14 @@ Uma rotação de fase desloca os pontos da constelação, o que pode dificultar 
 
 *Ensaio de referência a 0°.*
 
-![Constelação BPSK à saída do equalizador no ensaio a +20°](../prints/week5/constelacao_20graus.png)
+![Constelações à entrada e à saída do equalizador no ensaio a +20°](../prints/week5/constelacao_entrada_saida_20graus.png)
 
-*Ensaio com +20° introduzidos.*
+*Ensaio a +20°. Em cima, as 64 posições da FFT após introduzir a rotação. Em baixo, os pontos de dados à saída do equalizador.*
+
+No gráfico de entrada, o ponto à direita está perto de **(8,3; 3,0)**. A razão entre as componentes dá um ângulo de aproximadamente **20°** (`arctan(3,0 / 8,3)`), coerente com a rotação introduzida. As posições não utilizadas contribuem para o ponto na origem. No gráfico de saída, os pontos BPSK estão alinhados com o eixo real. Os gráficos têm escalas diferentes e mostram conjuntos de pontos diferentes, pelo que a comparação é visual.
 
 ## Comparação adicional a realizar
 
-Para visualizar o efeito no sinal, podemos observar as mesmas 48 subportadoras de dados do mesmo símbolo antes e depois do equalizador, mantendo a rotação de +20°. Esperamos vê-las rodadas à entrada e próximas das posições BPSK à saída. Esta comparação ainda não foi realizada. A saída do bloco inclui correção de fase e equalização, pelo que mostra o efeito conjunto das duas operações.
+Para comparar ponto a ponto, falta escolher as mesmas 48 subportadoras de dados de um único símbolo nos dois lados do equalizador. A captura acima mostra todas as posições da FFT à entrada, incluindo os pilotos e as posições não utilizadas. A saída do bloco mostra o efeito conjunto da correção de fase e da equalização.
 
 Outro ensaio possível é introduzir −20°. Nesse caso, prevemos um `beta` próximo de −0.349 rad. Ainda não medimos este caso.
