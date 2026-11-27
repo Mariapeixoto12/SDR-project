@@ -18,6 +18,10 @@ No [fluxograma da Week 5](WEEK5.grc), o **Fast Multiply Const** fica entre a FFT
 
 O recetor conhece os valores dos quatro pilotos. O equalizador compara os pilotos recebidos com os esperados para estimar a rotação e aplica o ângulo inverso, `−beta`, aos 64 valores de cada símbolo. O **Tag Debug** mostra o `beta` estimado para o símbolo SIGNAL, em radianos. [Código do equalizador](https://github.com/bastibl/gr-ieee802-11/blob/maint-3.10/lib/frame_equalizer_impl.cc)
 
+No código, os pilotos estão nas posições 11, 25, 39 e 53 do vetor da FFT deslocada. A função `arg` calcula `beta` a partir da soma dos quatro pilotos, considerando as polaridades esperadas. O tratamento dos dois símbolos de treino difere do tratamento dos símbolos seguintes. [Cálculo de beta](https://github.com/bastibl/gr-ieee802-11/blob/ad0598e4a874f4b8e1f391a1e0323e80df2b34ff/lib/frame_equalizer_impl.cc#L168-L178)
+
+Depois, o ciclo `for` percorre as 64 posições e multiplica cada valor complexo por `exp(−j·beta)`. É essa operação que aplica a rotação contrária. [Aplicação da correção](https://github.com/bastibl/gr-ieee802-11/blob/ad0598e4a874f4b8e1f391a1e0323e80df2b34ff/lib/frame_equalizer_impl.cc#L199-L202)
+
 | Rotação que introduzimos | Rotação estimada pelo recetor (`beta`) |
 |---:|---:|
 | 0° | `3.32614e-08 rad` (praticamente 0°) |
@@ -52,3 +56,7 @@ Acrescentámos um **Skip Head** para saltar os dois símbolos de treino e o SIGN
 Depois acrescentámos um **Head** no ramo de saída para mostrar os primeiros 48 valores também à saída. Na execução verificada, os grupos de entrada continuaram inclinados e os de saída apareceram em aproximadamente −1 e +1 no eixo real. A saída do bloco mostra o efeito conjunto da correção de fase e da equalização; os gráficos usam escalas diferentes.
 
 Outro ensaio possível é introduzir −20°. Nesse caso, prevemos um `beta` próximo de −0.349 rad. Ainda não medimos este caso.
+
+## Utilização de IA
+
+O ChatGPT e o Codex foram usados para ajudar a interpretar o código, preparar e verificar a montagem e organizar o texto. Os resultados registados provêm das execuções e capturas do GNU Radio.
