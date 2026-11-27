@@ -29,7 +29,3 @@ Na versão atual do módulo, a leitura do SIGNAL está integrada no **WiFi Frame
 Preparámos [WEEK6.grc](WEEK6.grc) a partir do circuito da Week 5. O recetor lê a mesma gravação simulada, com o Fast Multiply Const configurado para `1`. Acrescentámos dois Tag Debug à saída do equalizador para observar `encoding` e `frame bytes`.
 
 Numa **verificação automática do circuito**, apareceram 8 etiquetas `encoding` com valor `0` e 8 etiquetas `frame bytes` com valor `38`. O valor `0` corresponde a BPSK com taxa de codificação 1/2 na enumeração interna desta implementação; não é o valor bruto dos bits RATE. Os 38 bytes incluem 24 bytes de cabeçalho MAC, 10 bytes de mensagem e 4 bytes de verificação FCS. O tamanho indicado pelo SIGNAL não é apenas o da mensagem útil. Estes valores foram verificados pelo assistente e ainda devem ser observados pelo grupo no GNU Radio. [Construção da trama MAC](https://github.com/bastibl/gr-ieee802-11/blob/ad0598e4a874f4b8e1f391a1e0323e80df2b34ff/lib/mac.cc)
-
-## Utilização de IA
-
-O ChatGPT e o Codex foram usados para ajudar a interpretar o guião, o artigo e o código, preparar o circuito e organizar o texto. Os resultados experimentais serão identificados conforme forem observados.
