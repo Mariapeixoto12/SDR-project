@@ -1,4 +1,4 @@
-# Week 5 — resultados
+# Week 5 - resultados
 
 ## Sinal de referência
 
