@@ -56,7 +56,3 @@ Acrescentámos um **Skip Head** para saltar os dois símbolos de treino e o SIGN
 Depois acrescentámos um **Head** no ramo de saída para mostrar os primeiros 48 valores também à saída. Na execução verificada, os grupos de entrada continuaram inclinados e os de saída apareceram em aproximadamente −1 e +1 no eixo real. A saída do bloco mostra o efeito conjunto da correção de fase e da equalização; os gráficos usam escalas diferentes.
 
 Outro ensaio possível é introduzir −20°. Nesse caso, prevemos um `beta` próximo de −0.349 rad. Ainda não medimos este caso.
-
-## Utilização de IA
-
-O ChatGPT e o Codex foram usados para ajudar a interpretar o código, preparar e verificar a montagem e organizar o texto. Os resultados registados provêm das execuções e capturas do GNU Radio.
