@@ -1,4 +1,4 @@
-# Week 6 — equalização e campo SIGNAL
+# Week 6 - equalização e campo SIGNAL
 
 ## O que faz o equalizador?
 
